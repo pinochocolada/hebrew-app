@@ -1,19 +1,19 @@
 const PODCASTS = [
   {
     name: "Hebrew Time",
-    rss: "https://corsproxy.io/?https://anchor.fm/s/3f7a77ec/podcast/rss"
+    rss: "https://api.allorigins.win/raw?url=https://anchor.fm/s/3f7a77ec/podcast/rss"
   },
   {
     name: "Streetwise Hebrew",
-    rss: "https://corsproxy.io/?https://streetwisehebrew.libsyn.com/swh.rss"
+    rss: "https://api.allorigins.win/raw?url=https://streetwisehebrew.libsyn.com/swh.rss"
   },
   {
     name: "Hebrew Time",
-    rss: "https://corsproxy.io/?https://anchor.fm/s/3f7a77ec/podcast/rss"
+    rss: "https://api.allorigins.win/raw?url=https://anchor.fm/s/3f7a77ec/podcast/rss"
   },
   {
     name: "Streetwise Hebrew",
-    rss: "https://corsproxy.io/?https://streetwisehebrew.libsyn.com/swh.rss"
+    rss: "https://api.allorigins.win/raw?url=https://streetwisehebrew.libsyn.com/swh.rss"
   }
 ];
 
