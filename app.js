@@ -8,12 +8,12 @@ const PODCASTS = [
     rss: "https://corsproxy.io/?https://streetwisehebrew.libsyn.com/swh.rss"
   },
   {
-    name: "Ulpan Integraliah",
-    rss: "https://corsproxy.io/?https://feed.podbean.com/ulpan/feed.xml"
+    name: "Hebrew Time",
+    rss: "https://corsproxy.io/?https://anchor.fm/s/3f7a77ec/podcast/rss"
   },
   {
-    name: "Hebrew Podcasts",
-    rss: "https://corsproxy.io/?https://www.hebrewpodcasts.com/rss/hp.xml"
+    name: "Streetwise Hebrew",
+    rss: "https://corsproxy.io/?https://streetwisehebrew.libsyn.com/swh.rss"
   }
 ];
 
