@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a1a2e">
+  <title>עברית — Иврит</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+
+    <div class="header">
+      <div class="title">עברית</div>
+      <div class="subtitle">Просто слушай</div>
+    </div>
+
+    <div class="today-block">
+      <div class="today-label">Сегодня</div>
+      <div class="episode-source" id="episode-source">Загружаем...</div>
+      <div class="episode-title" id="episode-title">—</div>
+    </div>
+
+    <div class="player-block">
+      <audio id="audio" preload="none"></audio>
+
+      <button class="play-btn" id="play-btn">▶</button>
+
+      <div class="speed-block">
+        <button class="speed-btn active" data-speed="0.65">Медленно</button>
+        <button class="speed-btn" data-speed="0.8">Средне</button>
+        <button class="speed-btn" data-speed="1">Обычно</button>
+      </div>
+    </div>
+
+    <div class="stats-block">
+      <div class="stat">
+        <div class="stat-number" id="today-minutes">0</div>
+        <div class="stat-label">минут сегодня</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number" id="total-minutes">0</div>
+        <div class="stat-label">минут всего</div>
+      </div>
+    </div>
+
+    <div class="note">
+      Не нужно понимать каждое слово.<br>
+      Просто слушай пока работают руки.
+    </div>
+
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
