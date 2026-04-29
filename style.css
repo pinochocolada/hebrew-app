@@ -143,3 +143,20 @@ body {
   color: #4a4030;
   line-height: 1.6;
 }
+
+.next-btn {
+  background: none;
+  border: 1px solid rgba(212,175,55,0.2);
+  color: #6b6050;
+  padding: 8px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'Rubik', sans-serif;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+
+.next-btn:hover {
+  border-color: #d4af37;
+  color: #d4af37;
+}

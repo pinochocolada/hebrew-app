@@ -8,12 +8,16 @@ const PODCASTS = [
     rss: "/.netlify/functions/proxy?url=https://streetwisehebrew.libsyn.com/swh.rss"
   },
   {
-    name: "Hebrew Time",
-    rss: "/.netlify/functions/proxy?url=https://anchor.fm/s/3f7a77ec/podcast/rss"
+    name: "Hebrew Monkeys",
+    rss: "/.netlify/functions/proxy?url=https://anchor.fm/s/bf90f14/podcast/rss"
   },
   {
-    name: "Streetwise Hebrew",
-    rss: "/.netlify/functions/proxy?url=https://streetwisehebrew.libsyn.com/swh.rss"
+    name: "Hebrew Podcasts",
+    rss: "/.netlify/functions/proxy?url=https://www.hebrewpodcasts.com/rss/hp.xml"
+  },
+  {
+    name: "Home for Hebrew",
+    rss: "/.netlify/functions/proxy?url=https://feeds.rss.com/homeforhebrew"
   }
 ];
 
@@ -29,7 +33,10 @@ let secondsToday = 0;
 let secondsTotal = 0;
 let timer = null;
 
-// Загружаем статистику из localStorage
+let currentPodcastIndex = 0;
+let currentEpisodeIndex = 0;
+let currentItems = [];
+
 function loadStats() {
   const today = new Date().toDateString();
   const saved = JSON.parse(localStorage.getItem('hebrewStats') || '{}');
@@ -54,15 +61,13 @@ function updateStats() {
   totalMinutes.textContent = Math.floor(secondsTotal / 60);
 }
 
-// Выбираем подкаст на сегодня по дню недели
-function getTodayPodcast() {
+function getTodayPodcastIndex() {
   const day = new Date().getDay();
-  return PODCASTS[day % PODCASTS.length];
+  return day % PODCASTS.length;
 }
 
-// Парсим RSS
-async function loadEpisode() {
-  const podcast = getTodayPodcast();
+async function loadPodcast(podcastIndex) {
+  const podcast = PODCASTS[podcastIndex];
   episodeSource.textContent = podcast.name;
   episodeTitle.textContent = 'Загружаем...';
 
@@ -75,27 +80,56 @@ async function loadEpisode() {
 
     if (items.length === 0) throw new Error('Нет эпизодов');
 
+    currentItems = Array.from(items);
     const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
-    const item = items[dayOfYear % items.length];
+    currentEpisodeIndex = dayOfYear % currentItems.length;
 
-    const title = item.querySelector('title')?.textContent || 'Эпизод';
-    const enclosure = item.querySelector('enclosure');
-    const audioUrl = enclosure?.getAttribute('url');
-
-    episodeTitle.textContent = title;
-
-    if (audioUrl) {
-      audio.src = audioUrl;
-      audio.playbackRate = 0.65;
-    } else {
-      episodeTitle.textContent = 'Нет аудио в эпизоде';
-    }
+    loadEpisode();
   } catch (e) {
     episodeTitle.textContent = 'Ошибка загрузки. Проверь интернет.';
   }
 }
 
-// Плеер
+function loadEpisode() {
+  const item = currentItems[currentEpisodeIndex];
+  const title = item.querySelector('title')?.textContent || 'Эпизод';
+  const enclosure = item.querySelector('enclosure');
+  const audioUrl = enclosure?.getAttribute('url');
+
+  episodeTitle.textContent = title;
+
+  if (audioUrl) {
+    const wasPlaying = isPlaying;
+    if (isPlaying) {
+      audio.pause();
+      isPlaying = false;
+      playBtn.textContent = '▶';
+      clearInterval(timer);
+    }
+    audio.src = audioUrl;
+    audio.playbackRate = parseFloat(document.querySelector('.speed-btn.active')?.dataset.speed || 0.65);
+    if (wasPlaying) {
+      audio.play();
+      playBtn.textContent = '⏸';
+      isPlaying = true;
+      timer = setInterval(() => {
+        secondsToday++;
+        secondsTotal++;
+        updateStats();
+        saveStats();
+      }, 1000);
+    }
+  } else {
+    episodeTitle.textContent = 'Нет аудио в эпизоде';
+  }
+}
+
+function nextEpisode() {
+  if (currentItems.length === 0) return;
+  currentEpisodeIndex = (currentEpisodeIndex + 1) % currentItems.length;
+  loadEpisode();
+}
+
 playBtn.addEventListener('click', () => {
   if (isPlaying) {
     audio.pause();
@@ -115,7 +149,6 @@ playBtn.addEventListener('click', () => {
   }
 });
 
-// Скорость
 document.querySelectorAll('.speed-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
@@ -124,6 +157,10 @@ document.querySelectorAll('.speed-btn').forEach(btn => {
   });
 });
 
-// Старт
+document.getElementById('next-btn').addEventListener('click', nextEpisode);
+
+audio.addEventListener('ended', nextEpisode);
+
+currentPodcastIndex = getTodayPodcastIndex();
 loadStats();
-loadEpisode();
+loadPodcast(currentPodcastIndex);
