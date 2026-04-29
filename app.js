@@ -16,8 +16,8 @@ const PODCASTS = [
     rss: "/.netlify/functions/proxy?url=https://www.hebrewpodcasts.com/rss/hp.xml"
   },
   {
-    name: "Home for Hebrew",
-    rss: "/.netlify/functions/proxy?url=https://feeds.rss.com/homeforhebrew"
+    name: "Fluent Fiction",
+    rss: "/.netlify/functions/proxy?url=https://www.spreaker.com/show/5818690/episodes/feed"
   }
 ];
 
