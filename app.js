@@ -1,23 +1,33 @@
 const PODCASTS = [
   {
-    name: "Hebrew Time",
-    rss: "/.netlify/functions/proxy?url=https://anchor.fm/s/3f7a77ec/podcast/rss"
+    name: "Hebrew Time — Надя (1)",
+    rss: "/.netlify/functions/proxy?url=https://anchor.fm/s/3f7a77ec/podcast/rss",
+    block: [0, 54]
   },
   {
-    name: "Streetwise Hebrew",
-    rss: "/.netlify/functions/proxy?url=https://streetwisehebrew.libsyn.com/swh.rss"
+    name: "Hebrew Time — Надя (2)",
+    rss: "/.netlify/functions/proxy?url=https://anchor.fm/s/3f7a77ec/podcast/rss",
+    block: [55, 109]
   },
   {
-    name: "Hebrew Monkeys",
-    rss: "/.netlify/functions/proxy?url=https://anchor.fm/s/bf90f14/podcast/rss"
+    name: "ילדי טבע — природа Израиля",
+    rss: "/.netlify/functions/proxy?url=https://feed.podbean.com/omryg/feed.xml",
+    block: null
   },
   {
-    name: "Hebrew Podcasts",
-    rss: "/.netlify/functions/proxy?url=https://www.hebrewpodcasts.com/rss/hp.xml"
+    name: "שיר אחד — истории за песнями",
+    rss: "/.netlify/functions/proxy?url=https://omny.fm/shows/one-song/playlists/podcast.rss",
+    block: null
   },
   {
-    name: "Fluent Fiction",
-    rss: "/.netlify/functions/proxy?url=https://www.spreaker.com/show/5818690/episodes/feed"
+    name: "איך העולם עובד — как устроен мир",
+    rss: "/.netlify/functions/proxy?url=https://omny.fm/shows/howitworks/playlists/podcast.rss",
+    block: null
+  },
+  {
+    name: "המעבדה לילדים — лаборатория",
+    rss: "/.netlify/functions/proxy?url=https://omny.fm/shows/the-lab-for-children/playlists/podcast.rss",
+    block: null
   }
 ];
 
